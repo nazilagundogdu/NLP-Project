@@ -1,7 +1,7 @@
 # NLP-Project
 # A c-command decoder
 
-This project works on Penn Treebank. Extracting the list of c-commanding words from the parsed trees in the PTB, using nltk tools, the model classifies words into two categories of 1 and 0, with 1 meaning the two words are in c-command relation and 0 meaning they are not. The model trains on strings, not trees.
+This project is a c-command classifier over strings. The data is extracted from Penn Treebank. The list of c-commanding words were exracted from the parsed trees in the PTB, using nltk tools. Giving the sentence and this list (stored as a dictionary) to the model, the model classifies words into two categories of 1 and 0, with 1 meaning the two words are in c-command relation and 0 meaning they are not. 
 
 data.py: reads the data from Penn Treebank and generates instances and labels
 
