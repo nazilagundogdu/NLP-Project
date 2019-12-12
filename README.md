@@ -11,6 +11,8 @@ main.py: is the main classifier
 
 train.py: trains the model
 
+loss.py: computes the model's loss using cross entropy loss
+
 predict.py: does the prediction
 
 evaluate.py: does the evaluation
