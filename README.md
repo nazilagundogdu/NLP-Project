@@ -30,6 +30,7 @@ pip install -r requirements.txt
 ./download_glove.sh
 
 6. Train the model:
+
 python train.py main \
                   --seq2vec-choice gru \
                   --embedding-dim 50 \
