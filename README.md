@@ -17,7 +17,7 @@ predict.py: does the prediction
 
 evaluate.py: does the evaluation
 
-To implement the model, use the following steps:
+# To implement the model, use the following steps:
 
 1. You need to have conda, which can be installed at:
 https://conda.io/projects/conda/en/latest/user-guide/install/index.html
