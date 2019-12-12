@@ -92,7 +92,6 @@ for file in treebank.fileids()[150:]:
         
 def build_vocabulary(instances: List[Dict],
                      vocab_size: 10000, add_tokens: List[str] = None):
-                    # add_tokens: List[str] = None) -> Tuple[Dict, Dict]:
     """
     Parameters
     ----------
@@ -197,7 +196,7 @@ def load_glove_embeddings(embeddings_txt_file: str,
             embedding_matrix[idx] = embeddings[token]
 
     return embedding_matrix
-#import pdb;pdb.set_trace()
+
 def index_instances(instances: List[Dict], token_to_id: Dict) -> List[Dict]:
     """
     Uses the vocabulary to index the fields of the instances. This function
@@ -272,8 +271,7 @@ def generate_batches(instances: List[Dict], batch_size) -> List[Dict[str, np.nda
             batch["labels"][batch_index] = labels
             
                 
-            #if "labels" in instance:
-                #batch["labels"][batch_index] = np.array(instance["labels"])
+
         batches.append(batch)
 
     return batches
