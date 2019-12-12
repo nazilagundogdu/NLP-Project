@@ -18,16 +18,10 @@ class MainClassifier(models.Model):
                  num_layers: int = 2,
                  num_classes = 2) -> 'MainClassifier':
         """
-        It is a wrapper model for DAN or GRU sentence encoder.
-        The initializer typically stores configurations in private/public
-        variables, which need to accessed during the call (forward pass).
-        We also define the trainable variables (Parameters in TF1.0)
-        in the initializer.
 
         Parameters
         ----------
         seq2vec_choice : ``str``
-            Name of sentence encoder: "dan" or "gru".
         vocab_size : ``int``
             Vocabulary size used to index the data instances.
         embedding_dim : ``int``
@@ -71,10 +65,8 @@ class MainClassifier(models.Model):
         outputs = self._seq2vec_layer(embedded_tokens, tokens_mask, training)
         sentence_vector = outputs["combined_vector"]
         layer_representations = outputs["layer_representations"]
-       # import pdb;pdb.set_trace()
         word_representations= outputs["word_representations"]
         final = []
-       # for index in range(word_representations.shape[0]):
         x = len(word_representations)
         for index in range(x):
             a = tf.stack([word_representations[index] for x in range(x)],1)
@@ -82,11 +74,9 @@ class MainClassifier(models.Model):
             c = tf.stack(word_representations,1)
             
             final.append(tf.concat([a,b,c],2))
-        #import pdb;pdb.set_trace()
         
         final = tf.stack(final,1)
 
         
         logits = self._classification_layer(final)
-        #import pdb; pdb.set_trace()
         return {"logits": logits}
