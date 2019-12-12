@@ -1,5 +1,12 @@
 # NLP-Project
 
+data.py: reads the data from Penn Treebank and generates instances and labels
+sequence_to_vector.py: implements the GRU model and the Dense layer, gives back sentence representation and our stacked output
+main.py: is the main classifier
+train.py: trains the model
+predict.py: does the prediction
+evaluate.py: does the evaluation
+
 To implement the model, use the following steps:
 
 1. You need to have conda, which can be installed at:
