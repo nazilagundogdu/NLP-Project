@@ -86,7 +86,6 @@ class GruSequenceToVector(SequenceToVector):
              vector_sequence: tf.Tensor,
              sequence_mask: tf.Tensor,
              training=False) -> tf.Tensor:
-        # TODO(students): start
         self.sequence_mask= sequence_mask
 
         layer_representations= [] #define en empty list for layer_reps
@@ -100,12 +99,10 @@ class GruSequenceToVector(SequenceToVector):
 
         layer_representations = tf.convert_to_tensor(layer_representations, dtype=tf.float32) #convert layer_reps to tensor
         layer_representations = tf.transpose(layer_representations, perm= [1,0,2]) #correct the dimensions of layer_reps
-        # TODO(students): end
+        
         word_representations=[]
- #       import pdb; pdb.set_trace()
         for i in range(vector_sequence.shape[1]):
           word_representations.append(newGRU[0][:,i,:])
-        #import pdb; pdb.set_trace()
         word_representations= tf.convert_to_tensor(word_representations, dtype=tf.float32)
         return {"combined_vector": combined_vector,
                 "layer_representations": layer_representations,
