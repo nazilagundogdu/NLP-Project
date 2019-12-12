@@ -57,14 +57,9 @@ def train(model: models.Model,
                 grads = tape.gradient(loss_value, model.trainable_variables)
             optimizer.apply_gradients(zip(grads, model.trainable_variables))
             total_training_loss += loss_value
-            #import pdb; pdb.set_trace()
             batch_predictions = np.argmax(tf.nn.softmax(logits, axis=-1).numpy(), axis=-1)
-            #import pdb; pdb.set_trace()
-            #batch_predictions = tf.argmax(tf.nn.softmax(logits, axis=-1).numpy(), axis=-1)
-            #batch_predictions= tf.expand_dims(tf.transpose(batch_predictions), 2)
             true= (batch_predictions == batch_labels)
             true= tf.where(true==True, x=1.0, y=0.0)
-            #total_correct_predictions += (batch_predictions == batch_labels).sum()
             total_correct_predictions += tf.reduce_sum(true)
             total_predictions += batch_labels.shape[0]*batch_labels.shape[1]*batch_labels.shape[2]
             description = ("Average training loss: %.2f Accuracy: %.2f "
@@ -83,7 +78,6 @@ def train(model: models.Model,
             batch_predictions = np.argmax(tf.nn.softmax(logits, axis=-1).numpy(), axis=-1)
             true= (batch_predictions == batch_labels)
             true= tf.where(true==True, x=1.0, y=0.0)            
-            #total_correct_predictions += (batch_predictions == batch_labels).sum()
             total_correct_predictions += tf.reduce_sum(true)
 
             total_predictions += batch_labels.shape[0]*batch_labels.shape[1]*batch_labels.shape[2]
@@ -125,8 +119,6 @@ if __name__ == '__main__':
 
     # Setup common parser arguments for training of either models
     base_parser = argparse.ArgumentParser(add_help=False)
- #   base_parser.add_argument('train_data_file_path', type=str, help='training data file path')
-#    base_parser.add_argument('validation_data_file_path', type=str, help='validation data file path')
     base_parser.add_argument('--load-serialization-dir', type=str,
                              help='if passed, model will be loaded from this serialization directory.')
     base_parser.add_argument('--batch-size', type=int, default=64, help='batch size')
@@ -137,7 +129,6 @@ if __name__ == '__main__':
 
     subparsers = parser.add_subparsers(title='train_models', dest='model_name')
 
-    # Setup parser arguments for main model
     main_model_subparser = subparsers.add_parser("main", description='Train Main Model',
                                                  parents=[base_parser])
     main_model_subparser.add_argument('--seq2vec-choice', type=str, choices=("dan", "gru"),
@@ -151,7 +142,6 @@ if __name__ == '__main__':
                                       help='if passed, use glove embeddings to initialize. '
                                       'the embedding matrix')
 
-    # Setup parser arguments for probing model
     probing_model_subparser = subparsers.add_parser("probing", description='Train Probing Model',
                                                     parents=[base_parser])
     probing_model_subparser.add_argument('--base-model-dir', type=str, required=True,
@@ -225,7 +215,6 @@ if __name__ == '__main__':
                       "layer_num": args.layer_num, "classes_num": 2}
             classifier = ProbingClassifier(**config)
             config["type"] = "probing"
-    #import pdb;pdb.set_trace()
     train_instances = index_instances(instances, vocab_token_to_id)
     validation_instances = train_instances #index_instances(instances, vocab_token_to_id)
 
