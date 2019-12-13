@@ -19,6 +19,8 @@ evaluate.py: does the evaluation
 
 # To implement the model, use the following steps:
 
+After downloading all the files in the repo:
+
 1. You need to have conda, which can be installed at:
 https://conda.io/projects/conda/en/latest/user-guide/install/index.html
 
@@ -31,7 +33,7 @@ conda activate nlp-project
 4. Install the requirements:
 pip install -r requirements.txt
 
-5. Download glove wordvectors:
+5. Download glove word vectors:
 ./download_glove.sh
 
 6. Train the model:
